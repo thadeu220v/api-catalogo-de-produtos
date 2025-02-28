@@ -1,0 +1,28 @@
+{
+  "name": "api-catalogo-de-produtos",
+  "version": "1.0.0",
+  "description": "Esta é uma api que catalogará produtos, estoques, dados de produtos e seus relacionamentos, entre tabelas",
+  "homepage": "https://github.com/thadeu220v/api-catalogo-de-produtos#readme",
+  "bugs": {
+    "url": "https://github.com/thadeu220v/api-catalogo-de-produtos/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thadeu220v/api-catalogo-de-produtos.git"
+  },
+  "license": "ISC",
+  "author": "thadeu henrique dos anjos",
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "sequelize": "^6.37.5",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {}
+}
