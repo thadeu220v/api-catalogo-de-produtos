@@ -1,0 +1,26 @@
+{
+  "name": "api-catalogo-de-produtos",
+  "version": "1.0.0",
+  "description": "API de catalogo de produtos que inclui relação de categorias",
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "api-catalogo-de-produtos"
+  },
+  "license": "ISC",
+  "author": "thadeu henrique dos anjos",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "express": "^4.21.2",
+    "joi": "^17.13.3",
+    "joy": "^0.1.1",
+    "sequelize": "^6.37.5",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {}
+}
