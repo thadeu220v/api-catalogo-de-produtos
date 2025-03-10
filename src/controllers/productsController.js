@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { Product, Category } = require('../models');
+const { Product, Category } = require('../models/relations');
 
 const productSchema = Joi.object({
     name: Joi.string().min(3).required(),
@@ -48,7 +48,8 @@ exports.createProduct = async (req, res) => {
             const categories = await Category.findAll({ where: { id: value.categories } });
             await product.setCategories(categories);
         }
-        res.status(201).json(product);
+        const productWithCategories = await Product.findByPk(product.id, { include: Category });
+        res.status(201).json(productWithCategories);
     } catch (err) {
         console.error('Erro ao criar produto:', err);
         res.status(500).json({ error: 'Erro ao criar produto', code: 500 });
@@ -84,7 +85,8 @@ exports.updateProduct = async (req, res) => {
             const categories = await Category.findAll({ where: { id: value.categories } });
             await product.setCategories(categories);
         }
-        res.status(200).json(product);
+        const productWithCategories = await Product.findByPk(product.id, { include: Category });
+        res.status(200).json(productWithCategories);
     } catch (err) {
         console.error('Erro ao atualizar produto:', err);
         res.status(500).json({ error: 'Erro ao atualizar produto', code: 500 });
@@ -112,7 +114,8 @@ exports.partialUpdateProduct = async (req, res) => {
             const categories = await Category.findAll({ where: { id: value.categories } });
             await product.setCategories(categories);
         }
-        res.status(200).json(product);
+        const productWithCategories = await Product.findByPk(product.id, { include: Category });
+        res.status(200).json(productWithCategories);
     } catch (err) {
         console.error('Erro ao atualizar produto:', err);
         res.status(500).json({ error: 'Erro ao atualizar produto', code: 500 });

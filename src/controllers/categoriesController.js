@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { Category, Product } = require('../models');
+const { Category, Product } = require('../models/relations');
 
 const categorySchema = Joi.object({
     name: Joi.string().min(3).required()
