@@ -1,76 +1,109 @@
-# API de catálogo de produtos
-Este é um projeto feito para treinar habilidades com o nodeJS, usando o expressJS como framework de desenvolvimento.
+# API de Catálogo de Produtos
 
-## agradecimentos especiais
-Primeiramente, quero agradecer a todos os que acreditaram em meu progresso até este momento, sem eles, não seria capaz de progredir 1% do que progredi aqui.
-um salve vai para henrique Santos, que me iniciou com o básico que precisava para criar a base da API. ele me ensinou a fazer os filtros e estruturar o json de forma simples usando o bodyParser, criando o json de um jeito mais rápido.
-Também com sua paciência na hora de orientar a criar os caminhos de rotas.
+Este é um projeto desenvolvido para treinar habilidades com Node.js, utilizando o Express.js como framework de desenvolvimento e Sequelize como ORM para gerenciar o banco de dados.
 
-## como usar o projeto?
-Este projeto não conta com um ambiente gráfico. para instalar execute em seu ambiente:
+## Agradecimentos Especiais
+
+Primeiramente, quero agradecer a todos que acreditaram no meu progresso até este momento. Sem eles, não seria capaz de progredir 1% do que progredi aqui. Um salve especial para Henrique Santos, que me ensinou o básico necessário para criar a base da API, incluindo a criação de filtros e a estruturação de JSON de forma simples usando o body-parser, além de orientar na criação das rotas.
+
+## Como Usar o Projeto?
+
+Este projeto não possui uma interface gráfica. Para instalar e executar, siga os passos abaixo:
+
+### Clonar o Repositório
+
+```bash
 git clone https://github.com/thadeu220v/api-catalogo-de-produtos
-
-após, com o node e o npm instalados em seu ambiente, obtenha as dependências do projeto que estão no package.json
-rode:
+Instalar Dependências
+Certifique-se de ter o Node.js e o npm instalados em seu ambiente. Em seguida, instale as dependências do projeto:
 npm install
-
-após todas as dependências ativas na pasta do seu projeto., usando o terminal / prompt de comandos ou powershell, caminhe para a pasta aonde o projeto está clonado e  execute:
+Executar o Servidor
+Após instalar todas as dependências, navegue até a pasta do projeto e execute o servidor:
 node ./src/index.js
-
-isso inicializará o servidor na porta 3000 do seu localhost
-
-## novidade: banco de dados SQLite
-Agora, nas próximas versões, contaremos com um banco de dados feito em SQLite, que nos auxiliará a manter os dados dos produtos de forma permanente. É claro que, você poderá ainda contar com as funções de adição, alteração, leitura e apagamento de informações do banco de dados. 
-
-## rotas
-get /products == obtem todos os produtos adicionados no banco de dados
-post /products == permite adicionar novos produtos, o formato do json deve ser o seguinte:
-
+Isso inicializará o servidor na porta 3000 do seu localhost.
+Este sistema já inclui banco de dados em sqlite..
+# Rotas da API
+## Produtos
+GET /products: Obtém todos os produtos adicionados no banco de dados.
+POST /products: Permite adicionar novos produtos. O formato do JSON deve ser o seguinte:
 {
-    "title":"Nome do produto",
-    "description":"Descrição do produto",
-    "preco":44.00, ## o valor deverá ser um float
-"categoria": 1 ## deverá informar o ID da categoria, pode ser mais de uma categoria
+    "name": "Nome do produto",
+    "description": "Descrição do produto",
+    "price": 44.00,
+    "stock": 10,
+    "categories": [1, 2, 3]
 }
-
-### para consultar um produto específico registrado no json
-Envie uma solicitação get para:
-get http://localhost:3000/products/códigodoproduto
-Por exemplo:
-get http://localhost:3000/products/1
-Será retornado um json com os dados do produto solicitado. Se o produto não existir, será retornado um erro 404 com os detalhes da solicitação e sua negativa.
-
-### para editar um produto
-Envie uma solicitação put com o seguinte template de json para:
-put http://localhost:3000/products/numerodoproduto
-Por exemplo:
-put http://localhost:3000/products/1
-
-E o seguinte corpo de requisição:
+GET /products/:id: Consulta um produto específico pelo ID.
+PUT /products/:id: Edita um produto existente. Exemplo de corpo de requisição:
 {
-    "title":"novo titulo de produto",
-    "description":"nova descrição",
-    "preco":400.00, 
-"categoria": 1  
+    "name": "Novo título de produto",
+    "description": "Nova descrição",
+    "price": 400.00,
+    "stock": 20,
+    "categories": [1]
 }
-
-
-Será retornado um json com o produto cadastrado já modificado. Se ela não existir, será retornado um erro 404 com os detalhes da solicitação e sua negativa.
-Você pode conferir se a atualização ocorreu usando o seguinte comando http
-get http://localhost:3000/products
-assim será exibido todos os produtos, e com isso, será possível conferir todos os demais objetos do json.
-
-## atualizar apenas alguns campos do produto
-usando o http patch, é possível corrigir apenas alguns dos campos, não sendo necessário informar os demais campos de forma desnecessária, isso é útil para quando queremos por exemplo, modificar apenas algumas pequenas informações do sistema.
-Segue abaixo o exemplo de uma solicitação patch na API que atualiza o produto com ID = 1 apenas com o campo título:
-
-patch http://localhost:3000/products/1
+PATCH /products/:id: Atualiza parcialmente um produto. Exemplo de corpo de requisição:
 {
-    "title":"apenas mudarei o nome do produto"
+    "name": "Apenas mudarei o nome do produto"
 }
-
-Ao enviar a solicitação, apenas o campo de titulo do produto será alterado.
-## tem ideias? abra um pull request ou uma issue!
-Eu terei o prazer em responder no menor tempo.
-Contato: thadeu henrique dos anjos
-e-mail: thadeuhenriquedosanjos@gmail.com
+DELETE /products/:id: Deleta um produto pelo ID.
+Categorias
+GET /categories: Obtém todas as categorias adicionadas no banco de dados.
+POST /categories: Permite adicionar novas categorias. O formato do JSON deve ser o seguinte:
+{
+    "name": "Nome da categoria"
+}
+GET /categories/:id: Consulta uma categoria específica pelo ID.
+PUT /categories/:id: Edita uma categoria existente. Exemplo de corpo de requisição:
+{
+    "name": "Novo nome da categoria"
+}
+• DELETE /categories/:id: Deleta uma categoria pelo ID.
+### Comandos de Teste
+Testar Rotas de Produtos
+Obter todos os produtos:
+curl -X GET http://localhost:3000/products
+Adicionar um novo produto:
+curl -X POST http://localhost:3000/products -H "Content-Type: application/json" -d '{
+    "name": "Produto Teste",
+    "description": "Descrição do produto teste",
+    "price": 99.99,
+    "stock": 50,
+    "categories": [1, 2]
+}'
+Consultar um produto específico:
+curl -X GET http://localhost:3000/products/1
+Editar um produto:
+curl -X PUT http://localhost:3000/products/1 -H "Content-Type: application/json" -d '{
+    "name": "Produto Atualizado",
+    "description": "Descrição atualizada",
+    "price": 199.99,
+    "stock": 30,
+    "categories": [1]
+}'
+Atualizar parcialmente um produto:
+curl -X PATCH http://localhost:3000/products/1 -H "Content-Type: application/json" -d '{
+    "name": "Nome Parcialmente Atualizado"
+}'
+ Deletar um produto:
+curl -X DELETE http://localhost:3000/products/1
+Testar Rotas de Categorias
+ Obter todas as categorias:
+curl -X GET http://localhost:3000/categories
+ Adicionar uma nova categoria:
+curl -X POST http://localhost:3000/categories -H "Content-Type: application/json" -d '{
+    "name": "Categoria Teste"
+}'
+ Consultar uma categoria específica:
+curl -X GET http://localhost:3000/categories/1
+ Editar uma categoria:
+curl -X PUT http://localhost:3000/categories/1 -H "Content-Type: application/json" -d '{
+    "name": "Categoria Atualizada"
+}'
+ Deletar uma categoria:
+curl -X DELETE http://localhost:3000/categories/1
+## Contribuições
+Tem ideias? Abra um pull request ou uma issue! Terei o prazer em responder no menor tempo possível.
+## Contato
+Thadeu Henrique dos Anjos
+E-mail: thadeuhenriquedosanjos@gmail.com

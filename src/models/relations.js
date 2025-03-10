@@ -2,7 +2,7 @@ const sequelize = require('../config/bancodedados');
 const Product = require('./product');
 const Category = require('./category');
 
-// Definindo a relação muitos-para-muitos entre Produtos e Categorias
+
 Product.belongsToMany(Category, { through: 'ProductCategories' });
 Category.belongsToMany(Product, { through: 'ProductCategories' });
 
