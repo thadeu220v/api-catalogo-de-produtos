@@ -10,17 +10,20 @@ Primeiramente, quero agradecer a todos que acreditaram no meu progresso até est
 
 Este projeto não possui uma interface gráfica. Para instalar e executar, siga os passos abaixo:
 
-### Clonar o Repositório
+## Clonar o Repositório
 
 git clone https://github.com/thadeu220v/api-catalogo-de-produtos
-Instalar Dependências
+
+### Instalar Dependências
 Certifique-se de ter o Node.js e o npm instalados em seu ambiente. Em seguida, instale as dependências do projeto:
 npm install
-Executar o Servidor
+
+### Executar o Servidor
 Após instalar todas as dependências, navegue até a pasta do projeto e execute o servidor:
 node ./src/index.js
 Isso inicializará o servidor na porta 3000 do seu localhost.
-Este sistema já inclui banco de dados em sqlite..
+Este sistema já inclui banco de dados em sqlite.
+
 # Rotas da API
 ## Produtos
 GET /products: Obtém todos os produtos adicionados no banco de dados.
@@ -58,6 +61,7 @@ PUT /categories/:id: Edita uma categoria existente. Exemplo de corpo de requisi�
     "name": "Novo nome da categoria"
 }
 • DELETE /categories/:id: Deleta uma categoria pelo ID.
+
 ### Comandos de Teste
 Testar Rotas de Produtos
 Obter todos os produtos:
@@ -101,6 +105,7 @@ curl -X PUT http://localhost:3000/categories/1 -H "Content-Type: application/jso
 }'
  Deletar uma categoria:
 curl -X DELETE http://localhost:3000/categories/1
+
 ## Contribuições
 Tem ideias? Abra um pull request ou uma issue! Terei o prazer em responder no menor tempo possível.
 ## Contato
