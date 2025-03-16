@@ -12,7 +12,6 @@ Este projeto não possui uma interface gráfica. Para instalar e executar, siga 
 
 ### Clonar o Repositório
 
-```bash
 git clone https://github.com/thadeu220v/api-catalogo-de-produtos
 Instalar Dependências
 Certifique-se de ter o Node.js e o npm instalados em seu ambiente. Em seguida, instale as dependências do projeto:
