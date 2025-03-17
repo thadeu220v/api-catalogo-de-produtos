@@ -24,6 +24,29 @@ node ./src/index.js
 Isso inicializará o servidor na porta 3000 do seu localhost.
 Este sistema já inclui banco de dados em sqlite.
 
+## autenticação usando o JWT
+A API utiliza JWT (JSON Web Token) para proteger as rotas de manipulação de produtos e categorias. O processo de autenticação funciona da seguinte forma:
+### Gerar Token JWT:
+Acesse a rota /login e forneça o nome de usuário e senha no corpo da requisição.
+Usuário e Senha Padrões:
+username: está nos arquivos, procure
+password: analise nos arquivos, a senha está lá
+
+Essa configuração é temporária e não recomendada para produção. No futuro, será implementado um sistema mais seguro de validação com banco de dados.
+
+## login com o token gerado
+Após obter seu token gerado, você deverá inserí-lo no corpo da sua requisição, seja ela POST, GET, PUT, PATCH ou DELETE pelo seguinte formato.
+Authorization: Bearer <seu_token_jwt>
+
+
+## Um pequeno exemplo usando curl
+curl -X POST http://localhost:3000/login -H "Content-Type: application/json" -d '{
+    "username": "user",
+    "password": "pass"
+}'
+
+
+
 # Rotas da API
 ## Produtos
 GET /products: Obtém todos os produtos adicionados no banco de dados.
@@ -63,7 +86,7 @@ PUT /categories/:id: Edita uma categoria existente. Exemplo de corpo de requisi�
 • DELETE /categories/:id: Deleta uma categoria pelo ID.
 
 ### Comandos de Teste
-Testar Rotas de Produtos
+Testar Rotas de Produtos usando curl
 Obter todos os produtos:
 curl -X GET http://localhost:3000/products
 Adicionar um novo produto:
