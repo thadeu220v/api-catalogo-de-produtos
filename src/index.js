@@ -3,14 +3,20 @@ const bodyParser = require('body-parser');
 const sequelize = require('./config/bancodedados');
 const productsRoutes = require('./routes/products');
 const categoriesRoutes = require('./routes/categories');
+const autenticacaoRota = require('./routes/login');
+const auth = require('./middleware/auth');
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(productsRoutes);
-app.use(categoriesRoutes);
+// Rotas públicas (login)
+app.use(autenticacaoRota);
+
+// Rotas protegidas por autenticação
+app.use('/products', auth, productsRoutes);
+app.use('/categories', auth, categoriesRoutes);
 
 sequelize.sync().then(() => {
     app.listen(3000, () => {
