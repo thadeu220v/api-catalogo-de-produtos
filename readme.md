@@ -34,16 +34,22 @@ password: analise nos arquivos, a senha está lá
 
 Essa configuração é temporária e não recomendada para produção. No futuro, será implementado um sistema mais seguro de validação com banco de dados.
 
-## login com o token gerado
-Após obter seu token gerado, você deverá inserí-lo no corpo da sua requisição, seja ela POST, GET, PUT, PATCH ou DELETE pelo seguinte formato.
-Authorization: Bearer <seu_token_jwt>
-
-
 ## Um pequeno exemplo usando curl
 curl -X POST http://localhost:3000/login -H "Content-Type: application/json" -d '{
     "username": "user",
     "password": "pass"
 }'
+
+## um pequeno exemplo pelo json
+{
+    "username":"nome de usuário",
+    "password":"informeasenhaaqui"
+}
+
+
+## login com o token gerado
+Após obter seu token gerado, você deverá inserí-lo no corpo da sua requisição, seja ela POST, GET, PUT, PATCH ou DELETE pelo seguinte formato.
+Authorization: Bearer <seu_token_jwt>
 
 
 
