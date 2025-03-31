@@ -5,6 +5,10 @@ const categorySchema = Joi.object({
     name: Joi.string().min(3).required()
 }).unknown(false);
 
+const patchCategorySchema = Joi.object({
+    name: Joi.string().min(3)
+}).unknown(false).min(1);
+
 exports.getAllCategories = async (req, res) => {
     try {
         const categories = await Category.findAll();
@@ -61,6 +65,28 @@ exports.updateCategory = async (req, res) => {
         res.status(500).json({ error: 'Erro ao atualizar categoria', code: 500 });
     }
 };
+
+exports.partialUpdateCategory = async (req, res) => {
+    const { error, value } = patchCategorySchema.validate(req.body);
+    if (error) {
+        return res.status(400).json({ error: error.details[0].message, code: 400 });
+    }
+
+    try {
+        const category = await Category.findByPk(req.params.id);
+        if (!category) {
+            return res.status(404).json({ error: 'Não encontramos esta categoria para atualização', code: 404 });
+        }
+
+        await category.update(value);
+        const updatedCategory = await Category.findByPk(req.params.id);
+        res.status(200).json(updatedCategory);
+    } catch (err) {
+        console.error('Erro ao atualizar parcialmente a categoria:', err);
+        res.status(500).json({ error: 'Erro ao fazer patch na categoria', code: 500 });
+    }
+};
+
 
 exports.deleteCategory = async (req, res) => {
     try {

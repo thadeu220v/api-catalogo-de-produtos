@@ -94,32 +94,32 @@ exports.updateProduct = async (req, res) => {
 };
 
 exports.partialUpdateProduct = async (req, res) => {
-    try {
-        const product = await Product.findByPk(req.params.id);
-        if (!product) {
-            return res.status(404).json({ error: 'Não encontramos este produto para atualização', code: 404 });
-        }
+try {
+const product = await Product.findByPk(req.params.id);
+if (!product) {
+return res.status(404).json({ error: 'Não encontramos este produto para atualização', code: 404 });
+}
 
-        const updatedData = { ...product.toJSON(), ...req.body };
-        delete updatedData.id;
-        delete updatedData.createdAt;
-        delete updatedData.updatedAt;
-        const { error, value } = productSchema.validate(updatedData);
-        if (error) {
-            return res.status(400).json({ error: error.details[0].message, code: 400 });
-        }
+const updatedData = { ...product.toJSON(), ...req.body };
+delete updatedData.id;
+delete updatedData.createdAt;
+delete updatedData.updatedAt;
+const { error, value } = productSchema.validate(updatedData);
+if (error) {
+return res.status(400).json({ error: error.details[0].message, code: 400 });
+}
 
-        await product.update(value);
-        if (value.categories) {
-            const categories = await Category.findAll({ where: { id: value.categories } });
-            await product.setCategories(categories);
-        }
-        const productWithCategories = await Product.findByPk(product.id, { include: Category });
-        res.status(200).json(productWithCategories);
-    } catch (err) {
-        console.error('Erro ao atualizar produto:', err);
-        res.status(500).json({ error: 'Erro ao atualizar produto', code: 500 });
-    }
+await product.update(value);
+if (value.categories) {
+const categories = await Category.findAll({ where: { id: value.categories } });
+await product.setCategories(categories);
+}
+const productWithCategories = await Product.findByPk(product.id, { include: Category });
+res.status(200).json(productWithCategories);
+} catch (err) {
+console.error('Erro ao atualizar produto:', err);
+res.status(500).json({ error: 'Erro ao atualizar produto', code: 500 });
+}
 };
 
 exports.deleteProduct = async (req, res) => {
