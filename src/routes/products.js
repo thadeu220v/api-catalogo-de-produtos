@@ -9,5 +9,7 @@ router.get('/:id', autenticacaoMiddleware, productsController.getProductById);
 router.put('/:id', autenticacaoMiddleware, productsController.updateProduct);
 router.patch('/:id', autenticacaoMiddleware, productsController.partialUpdateProduct);
 router.delete('/:id', autenticacaoMiddleware, productsController.deleteProduct);
+router.patch('/:id/buy', autenticacaoMiddleware, productsController.buyProductStock);
+router.patch('/:id/sell', autenticacaoMiddleware, productsController.sellProductStock);
 
 module.exports = router;

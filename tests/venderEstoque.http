@@ -1,0 +1,7 @@
+PATCH http://localhost:3000/products/1/sell HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRoYWRldSIsImlhdCI6MTc0NDAyNjEzOSwiZXhwIjoxNzQ0MDI5NzM5fQ.YL2ZgVLcs_lR2XaQYGEk18IIulDidiQODyEiz0J9_5o
+
+{
+  "quantity": 3
+}
