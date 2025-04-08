@@ -1,6 +1,10 @@
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '.env') });
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const sequelize = require('./config/bancodedados');
+require('./models/user');
 const productsRoutes = require('./routes/products');
 const categoriesRoutes = require('./routes/categories');
 const autenticacaoRota = require('./routes/login');
@@ -11,10 +15,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Rotas públicas (login)
 app.use(autenticacaoRota);
 
-// Rotas protegidas por autenticação
 app.use('/products', auth, productsRoutes);
 app.use('/categories', auth, categoriesRoutes);
 

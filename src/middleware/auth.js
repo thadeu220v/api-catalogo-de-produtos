@@ -1,5 +1,9 @@
 const jwt = require('jsonwebtoken');
-const chave = 'desenvolvimentoContinuo';
+const jwtSecret = process.env.JWT_SECRET;
+
+if (!jwtSecret) {
+    throw new Error('JWT_SECRET não está definido no .env');
+}
 
 module.exports = (req, res, next) => {
     const token = req.header('Authorization')?.replace('Bearer ', '');
@@ -8,10 +12,13 @@ module.exports = (req, res, next) => {
     }
 
     try {
-        const decodificado = jwt.verify(token, chave);
+        const decodificado = jwt.verify(token, jwtSecret);
         req.user = decodificado;
         next();
     } catch (err) {
+        if (err.name === 'TokenExpiredError') {
+             return res.status(401).json({ error: 'Token expirado.', code: 401 });
+        }
         res.status(400).json({ error: 'Token inválido.', code: 400 });
     }
 };
