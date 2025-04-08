@@ -18,8 +18,19 @@ git clone https://github.com/thadeu220v/api-catalogo-de-produtos
 Certifique-se de ter o Node.js e o npm instalados em seu ambiente. Em seguida, instale as dependências do projeto:
 npm install
 
+## gerenciamento do arquivo de variáveis de ambiente
+Este sistema exige autenticação por meio de um arquivo de valores de ambiente, isso significa que o usuário e senha são definidos dentro de /src/.env
+dentro do repositório, já temos um arquivo preenchido. basta substituir com os valores de ADMINUSERNAME e ADMINPASSWORD. com os valores de usuário e senha que deseja utilizar.
+
+## criando o usuário administraodr
+como parte do processo de instalação é importante antes de executar o servidor, criar o usuário e senha de banco de dados que serão usados para gerar o token de acesso, e por fim,  com o token, manipular o serviço.
+após informar o usuário e senha no arquivo .env fornecido, você deve executar no seu ambiente o seguinte arquivo com o comando:
+node ./src/scripts/createUser.js
+
+este comando criará o usuário e senha no banco de dados.
+
 ### Executar o Servidor
-Após instalar todas as dependências, navegue até a pasta do projeto e execute o servidor:
+Após instalar todas as dependências, criar o arquivo .env e o usuário administrador, navegue até a pasta do projeto e execute o servidor:
 node ./src/index.js
 Isso inicializará o servidor na porta 3000 do seu localhost.
 Este sistema já inclui banco de dados em sqlite.
@@ -28,9 +39,7 @@ Este sistema já inclui banco de dados em sqlite.
 A API utiliza JWT (JSON Web Token) para proteger as rotas de manipulação de produtos e categorias. O processo de autenticação funciona da seguinte forma:
 ### Gerar Token JWT:
 Acesse a rota /login e forneça o nome de usuário e senha no corpo da requisição.
-Usuário e Senha Padrões:
-username: está nos arquivos, procure
-password: analise nos arquivos, a senha está lá
+Usuário e Senha informados no seu .env que foram criados no banco:
 
 Essa configuração é temporária e não recomendada para produção. No futuro, será implementado um sistema mais seguro de validação com banco de dados.
 
