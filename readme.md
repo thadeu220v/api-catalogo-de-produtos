@@ -22,7 +22,7 @@ npm install
 Este sistema exige autenticação por meio de um arquivo de valores de ambiente, isso significa que o usuário e senha são definidos dentro de /src/.env
 dentro do repositório, já temos um arquivo preenchido. basta substituir com os valores de ADMINUSERNAME e ADMINPASSWORD. com os valores de usuário e senha que deseja utilizar.
 
-## criando o usuário administraodr
+## criando o usuário administrador
 como parte do processo de instalação é importante antes de executar o servidor, criar o usuário e senha de banco de dados que serão usados para gerar o token de acesso, e por fim,  com o token, manipular o serviço.
 após informar o usuário e senha no arquivo .env fornecido, você deve executar no seu ambiente o seguinte arquivo com o comando:
 node ./src/scripts/createUser.js

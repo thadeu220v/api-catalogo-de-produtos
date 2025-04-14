@@ -1,6 +1,6 @@
 POST http://localhost:3000/products/ HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer Cwh5Tulmw4BCmUzsPidqZNW1WjP6f25nCe94uz9aQ6IqQjpMRt
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0aGFkZXUiLCJpYXQiOjE3NDQ2NTE4MTQsImV4cCI6MTc0NDY1NTQxNH0.9iDl-GtFwuGjQIe_eLVoMUMXJ4cf3Cs2cQyHhEbH_R8
 
 {
     "name": "product exemplo",
